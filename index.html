@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>順風耳 Earshot — 把手機訊息唸出來</title>
+<meta name="description" content="順風耳會把手機收到的訊息通知自動唸出來。開車、走路、手上在忙的時候，不用拿手機也知道誰傳了什麼。完全離線，沒有網路權限。">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555555;
+    --brand: #1B4F9C;
+    --on-brand: #ffffff;
+    --card: #f2f4f8;
+    --line: #d6dae2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #f0f2f5;
+      --muted: #a8b0bd;
+      --brand: #7fa9e8;
+      --on-brand: #10141b;
+      --card: #1e222a;
+      --line: #333944;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 20px 64px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    font-size: 18px;
+    line-height: 1.85;
+    max-width: 760px;
+    margin-inline: auto;
+    word-break: break-word;
+  }
+  header { text-align: center; padding: 48px 0 8px; }
+  header img {
+    width: 112px; height: 112px;
+    border-radius: 26px;
+    display: block;
+    margin: 0 auto 20px;
+  }
+  h1 { font-size: 2.1rem; line-height: 1.3; margin: 0 0 6px; }
+  .tagline { font-size: 1.15rem; color: var(--muted); margin: 0; }
+  h2 { font-size: 1.3rem; margin: 2.4em 0 0.6em; padding-top: 0.7em; border-top: 1px solid var(--line); }
+  .lead {
+    background: var(--card);
+    border-left: 5px solid var(--brand);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 32px 0 0;
+  }
+  .lead strong { color: var(--brand); }
+  ul { padding-left: 1.3em; }
+  li { margin-bottom: 0.5em; }
+  .feature { margin: 1.6em 0; }
+  .feature h3 { font-size: 1.05rem; margin: 0 0 4px; }
+  .feature p { margin: 0; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 0; }
+  .btn {
+    display: inline-block;
+    padding: 14px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    min-height: 48px;
+    border: 2px solid var(--brand);
+  }
+  .btn-solid { background: var(--brand); color: var(--on-brand); }
+  .btn-ghost { color: var(--brand); }
+  .btn-disabled {
+    border-color: var(--line);
+    color: var(--muted);
+    cursor: default;
+  }
+  .note { font-size: 0.94rem; color: var(--muted); }
+  footer {
+    margin-top: 3.5em; padding-top: 1.2em;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 0.92rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="data:image/png;base64,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" alt="順風耳 App 圖示：白色對話框與三道音波，深藍底">
+  <h1>順風耳 Earshot</h1>
+  <p class="tagline">訊息一進來，就自動唸出來</p>
+</header>
+
+<div class="lead">
+  <p>順風耳會把手機收到的訊息通知<strong>用語音唸出來</strong>，不用把手機拿起來看。</p>
+  <p>誰傳的、在哪個群組、說了什麼，一次講清楚。</p>
+</div>
+
+<h2>適合什麼時候用</h2>
+<ul>
+  <li>開車或騎車，手不能離開把手</li>
+  <li>走路、運動、做家事，手上正在忙</li>
+  <li>看螢幕上的字很吃力，訊息進來只能等別人幫忙唸</li>
+</ul>
+
+<h2>主要功能</h2>
+
+<div class="feature">
+  <h3>自動播報</h3>
+  <p>訊息一進來就唸，不必解鎖、不必點開。</p>
+</div>
+
+<div class="feature">
+  <h3>只唸你要聽的</h3>
+  <p>可以逐一選擇要播報哪些 App，每個 App 底下還能再細分——某個人說的話不唸、
+  某個群組不唸、內容含有某個詞不唸。不必為了一個吵的來源把整個 App 關掉。</p>
+</div>
+
+<div class="feature">
+  <h3>聽得舒服</h3>
+  <p>語速、音量、音高、聲音都可以調，先試聽再決定。同一個人連續傳好幾則不會一直重覆唸名字。
+  貼圖、照片、語音訊息會用一句話帶過。</p>
+</div>
+
+<div class="feature">
+  <h3>免打擾時段與一鍵暫停</h3>
+  <p>設定幾點到幾點不播報；通知欄常駐一則控制列，開會時按一下就安靜。</p>
+</div>
+
+<h2>關於隱私</h2>
+
+<p><strong>順風耳沒有連網的權限。</strong></p>
+
+<p>這不只是承諾——App 沒有宣告網路權限，Android 會讓任何連線嘗試直接失敗。
+就算想傳也傳不出去。你可以到「設定 → 應用程式 → 順風耳 → 權限」自己確認。</p>
+
+<ul>
+  <li>沒有帳號、不必註冊</li>
+  <li>沒有廣告、沒有追蹤分析</li>
+  <li>唸過的訊息只留在記憶體裡，關掉就沒了</li>
+  <li>診斷紀錄只留 3 天，過期自動清除</li>
+</ul>
+
+<h2>取得順風耳</h2>
+
+<div class="links">
+  <!-- 上架後把下面這行換成：
+       <a class="btn btn-solid" href="https://play.google.com/store/apps/details?id=tw.earshot">在 Google Play 下載</a>
+       在那之前不要放連結——現在點下去是 404，對商店審查與使用者都不好看。 -->
+  <span class="btn btn-disabled">即將在 Google Play 上架</span>
+  <a class="btn btn-ghost" href="https://shihjia.github.io/earshot-privacy/">隱私權政策</a>
+</div>
+
+<p class="note" style="margin-top:20px">
+  僅支援 Android。iPhone 沒有這個 App——iOS 不開放第三方讀取訊息通知，這是平台限制。
+</p>
+
+<h2>這支 App 的由來</h2>
+
+<p>一開始是為了家裡一位看螢幕很吃力的家人做的。他不知道訊息是誰傳的、寫了什麼，
+只能等身邊有人幫他唸。做了順風耳之後，訊息一進來就自己唸出來。</p>
+
+<p>後來發現需要這個的人其實不少——開車的、走路的、手上正在忙的，
+都會有「聽得到就好，不想拿手機」的時候。</p>
+
+<footer>順風耳 Earshot ・ 個人開發的免費 App</footer>
+
+</body>
+</html>
