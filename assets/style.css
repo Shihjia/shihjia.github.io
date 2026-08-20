@@ -128,6 +128,23 @@ li { margin-bottom: 0.5em; }
 
 .note { font-size: 0.94rem; color: var(--muted); }
 
+/* ── 文件頁（隱私權政策這類純文字長頁）──
+   沒有 header 圖示區，標題直接接在返回列下面，所以 h1 小一級。 */
+.doc h1 { font-size: 1.9rem; line-height: 1.35; margin: 0 0 4px; }
+.doc .sub { color: var(--muted); margin: 0 0 28px; }
+.doc .lead { margin: 0 0 28px; }
+.doc h2:first-of-type { border-top: 0; padding-top: 0; }
+
+table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.94rem; }
+th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+th { background: var(--card); }
+
+/* 表格欄數多的時候讓表格自己橫向捲，不要把整頁撐寬——
+   手機上整頁能左右拖是很難用的。用 <div class="scroll"> 包住 <table>。 */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+code { background: var(--card); padding: 2px 6px; border-radius: 5px; font-size: 0.92em; }
+
 /* ── 返回列與頁尾 ── */
 .back { padding-top: 24px; }
 .back a { color: var(--brand); text-decoration: none; font-weight: 600; }

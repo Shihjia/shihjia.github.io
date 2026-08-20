@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>順風耳 Earshot 隱私權政策</title>
+<meta name="description" content="順風耳 Earshot 的隱私權政策。順風耳不蒐集、不上傳、不分享任何個人資料——App 沒有宣告網路權限，想傳也傳不出去。">
+<link rel="canonical" href="https://shihjia.github.io/earshot/privacy/">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body class="doc">
+
+<p class="back"><a href="../">‹ 回到順風耳</a></p>
+
+<h1>順風耳 Earshot 隱私權政策</h1>
+<p class="sub">最後更新：2026 年 8 月 17 日</p>
+
+<div class="lead">
+  <p><strong>順風耳不蒐集、不上傳、不分享任何個人資料。</strong></p>
+  <p>這不只是承諾，是系統層級擋著的事實：順風耳沒有宣告網路權限
+  （<code>android.permission.INTERNET</code>），Android 會讓任何連線嘗試直接失敗。
+  不是「我們保證不傳」，是「想傳也傳不出去」。</p>
+  <p>你可以自己驗證：到「設定 → 應用程式 → 順風耳 → 權限」看一眼就知道。</p>
+</div>
+
+<h2>順風耳讀取什麼</h2>
+<p>要把通知唸出來，就必須讀得到通知。你必須在系統設定裡手動開啟「通知存取權」，
+順風耳才能運作；你隨時可以在同一個地方關掉。</p>
+<p>順風耳讀取通知的內容（傳訊者、群組名稱、訊息文字），用途只有一個：
+<strong>組成一句話，用手機的語音引擎唸出來</strong>。唸完就結束，沒有其他用途。</p>
+<p>順風耳沒有帳號、不需要註冊、沒有廣告、沒有分析追蹤工具、沒有當機回報服務。</p>
+
+<h2>順風耳在你手機上留下什麼</h2>
+<p>全部存在 App 的私有目錄，其他 App 讀不到，也不會備份到雲端
+（<code>allowBackup="false"</code>，連 <code>adb backup</code> 都撈不走）。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>存了什麼</th><th>存在哪裡</th><th>留多久</th><th>怎麼清掉</th></tr>
+  <tr>
+    <td>播報紀錄（含訊息內容）</td>
+    <td><strong>記憶體</strong>，沒有寫進檔案</td>
+    <td>App 被系統關掉就消失；最多 100 筆且只留 3 天</td>
+    <td>播報紀錄 → 清空紀錄</td>
+  </tr>
+  <tr>
+    <td>事件日誌（診斷用）</td>
+    <td>檔案</td>
+    <td>只留 3 天，過期自動清除</td>
+    <td>播報紀錄 → 清空紀錄</td>
+  </tr>
+  <tr>
+    <td>人員與群組<strong>名稱</strong></td>
+    <td>檔案</td>
+    <td>每個 App 最多 30 個，超過自動汰換最舊的</td>
+    <td>各 App 的「清除這個 App 的名單與規則」</td>
+  </tr>
+  <tr><td>App 圖示</td><td>檔案</td><td>直到你解除安裝</td><td>解除安裝</td></tr>
+  <tr><td>你的設定</td><td>檔案</td><td>直到你解除安裝</td><td>解除安裝</td></tr>
+</table>
+</div>
+
+<p>關於人員與群組名稱：這是為了讓你設定「某某人的訊息不要唸」時，
+可以直接從清單挑選而不必自己打字。<strong>只記名稱，不記任何訊息內容。</strong></p>
+
+<p>事件日誌刻意<strong>不寫訊息內容</strong>——只記錄「幾點收到哪個 App 的哪一類通知、幾個字」，
+那是為了排查「為什麼沒有唸」用的，看不出訊息寫了什麼。</p>
+
+<h2>診斷檔匯出</h2>
+<p>如果你要回報問題，App 裡有「匯出診斷檔」功能，會把事件日誌寫到手機的「下載」資料夾。</p>
+<ul>
+  <li>預設<strong>不包含</strong>訊息內容與人名，全部以遮蔽符號取代</li>
+  <li>你可以自己勾選「包含訊息內容」，勾之前畫面上有紅字警告</li>
+  <li>匯出的檔案<strong>由你決定要不要傳給任何人</strong>。順風耳不會自己傳出去，也傳不出去</li>
+</ul>
+<p>「下載」資料夾是公開的，其他 App 讀得到。這是唯一一個資料可能離開 App 私有範圍的路徑，
+而且完全由你手動觸發。</p>
+
+<h2>權限說明</h2>
+<div class="scroll">
+<table>
+  <tr><th>權限</th><th>為什麼需要</th></tr>
+  <tr><td>通知存取（在系統設定裡授權）</td><td>沒有它就讀不到通知，App 完全無法運作</td></tr>
+  <tr><td>顯示通知</td><td>顯示常駐控制列，讓你一鍵暫停播報。不給也能正常播報</td></tr>
+  <tr><td>忽略電池最佳化</td><td>省電機制會在螢幕關閉後凍結背景程式，播報就停了。<strong>選用</strong>，不給也能用，只是鎖屏後可能不出聲</td></tr>
+  <tr><td>喚醒鎖</td><td>螢幕關閉時 CPU 會休眠，語音會被切斷。只在播報那幾秒持有</td></tr>
+  <tr><td>前景服務</td><td>讓系統不要把播報服務回收掉</td></tr>
+</table>
+</div>
+<p>順風耳<strong>沒有</strong>下列權限：網路、麥克風、相機、位置、聯絡人、簡訊、查詢已安裝的 App 清單。</p>
+
+<h2>兒童</h2>
+<p>順風耳不是給兒童使用的產品，也不會針對兒童蒐集任何資料（它不蒐集任何人的資料）。</p>
+
+<h2>政策變更</h2>
+<p>如果未來版本改變了資料的處理方式，這份政策會先更新，並在 App 的更新說明裡寫清楚。
+<strong>特別是：若哪一天順風耳需要網路權限，這件事會被明確告知，不會悄悄加上去。</strong></p>
+
+<h2>聯絡方式</h2>
+<p>有任何疑問，請透過 Google Play 商店頁面留言，或寄信到商店頁上列出的開發者信箱。</p>
+
+<footer>
+  <a href="../">順風耳 Earshot</a> ・ <a href="../../">ShihJia 的 App</a>
+</footer>
+
+</body>
+</html>

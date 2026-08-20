@@ -9,6 +9,7 @@
 |---|---|
 | 首頁（App 列表） | `https://shihjia.github.io/` |
 | 順風耳 Earshot | `https://shihjia.github.io/earshot/` |
+| 順風耳隱私權政策 | `https://shihjia.github.io/earshot/privacy/` |
 
 首頁的網址就是填進 **Play Console → 開發者帳號 → 公開個人資料 → 網站** 的那一個。
 
@@ -18,7 +19,9 @@
 .
 ├── index.html          首頁：簡介 + App 卡片列表
 ├── earshot/
-│   └── index.html      順風耳介紹頁
+│   ├── index.html      順風耳介紹頁
+│   └── privacy/
+│       └── index.html  順風耳隱私權政策（正本）
 ├── assets/
 │   ├── style.css       ← 所有頁面共用，不要複製第二份
 │   └── earshot-icon.png
@@ -54,7 +57,19 @@
 
 - **順風耳 Earshot 的原始碼**：`C:\Project\MyEyes`（private repo `Shihjia/MyEyes`）
   上架流程與商店文案在它的 `docs/21-play-release.md`
-- **順風耳的隱私權政策**：另一個 repo `Shihjia/earshot-privacy`，
-  網址 `https://shihjia.github.io/earshot-privacy/`
-  ⚠️ 那個網址是**寫死在 App 程式裡**的，不要為了整理而搬動它——
-  搬了就得重新打包 App 才會生效
+- **順風耳的隱私權政策**：正本已併入本站 `earshot/privacy/`。
+  要改政策內容就改這裡，不要改別的地方。
+
+  ⚠️ **舊網址 `https://shihjia.github.io/earshot-privacy/` 必須永久保留**，
+  它由另一個 repo `Shihjia/earshot-privacy` 提供，原因有兩個：
+
+  1. 那個網址**寫死在 App 程式裡**（`MyEyes` 的
+     `earshot/app/src/main/java/tw/earshot/ui/AboutScreen.kt` 的 `PRIVACY_URL`），
+     已安裝的版本改不了，只能靠舊網址繼續有效
+  2. 同一個網址也填在 **Play Console 的隱私權政策欄位**
+     （見 `MyEyes` 的 `docs/21-play-release.md`）；連結失效會踩到商店政策
+
+  所以那個 repo 不能刪、不能關 Pages。它現在的角色是**轉址到本站的正本**。
+  下次要為順風耳發新版時，可以順手把 `AboutScreen.kt` 的 `PRIVACY_URL`
+  改成 `https://shihjia.github.io/earshot/privacy/`——但**改了之後舊網址還是要留著**，
+  舊版 App 仍然指著它。
