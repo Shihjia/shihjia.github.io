@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>順風耳 Earshot — 把手機訊息唸出來</title>
-<meta name="description" content="順風耳會把手機收到的訊息通知自動唸出來。開車、走路、手上在忙的時候，不用拿手機也知道誰傳了什麼。完全離線，沒有網路權限。">
+<meta name="description" content="順風耳會把手機收到的訊息通知自動唸出來。開車、走路、手上在忙的時候，不用拿手機也知道誰傳了什麼。處理通知內容的程式碼完全不連網。">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -55,10 +55,12 @@
 
 <h2>關於隱私</h2>
 
-<p><strong>順風耳沒有連網的權限。</strong></p>
+<p><strong>處理你通知內容的程式碼完全沒有網路存取能力。</strong></p>
 
-<p>這不只是承諾——App 沒有宣告網路權限，Android 會讓任何連線嘗試直接失敗。
-就算想傳也傳不出去。你可以到「設定 → 應用程式 → 順風耳 → 權限」自己確認。</p>
+<p>這不只是承諾——負責唸出通知的那部分程式碼，跟能連網的那部分程式碼，
+是完全分開、互不相通的兩套。App 另外有兩個很小的網路功能（查詢新版本、
+Google Play 贊助），兩者都跟你的訊息內容或使用行為無關。
+你可以到「設定 → 應用程式 → 順風耳 → 權限」自己確認。</p>
 
 <ul>
   <li>沒有帳號、不必註冊</li>
